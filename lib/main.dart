@@ -9,13 +9,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Filmer',
-      theme: ThemeData(
-        primarySwatch: Colors.black,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(title: 'Filmer'),
-    );
+        title: 'Filmer',
+        theme: ThemeData.dark(),
+        // home: MyHomePage(title: 'Filmer'),
+        home: Scaffold(
+          body: MovieList(),
+        ));
   }
 }
 

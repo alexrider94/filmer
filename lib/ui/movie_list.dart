@@ -6,16 +6,20 @@ class MovieList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bloc.fetchAllMovies();
-    return StreamBuilder(
-      builder: (context, AsyncSnapshot<ItemModel> snapshot) {
-        if (snapshot.hasData) {
-          return buildList(snapshot);
-        } else if (snapshot.hasError) {
-          return Text(snapshot.error.toString());
-        }
-        return Center(child: CircularProgressIndicator());
-      },
-    );
+    return Scaffold(
+        appBar: AppBar(title: Text('Filmer')),
+        body: StreamBuilder(
+          stream: bloc.allMovies,
+          builder: (context, AsyncSnapshot<ItemModel> snapshot) {
+            print(snapshot);
+            if (snapshot.hasData) {
+              return buildList(snapshot);
+            } else if (snapshot.hasError) {
+              return Text(snapshot.error.toString());
+            }
+            return Center(child: CircularProgressIndicator());
+          },
+        ));
   }
 
   Widget buildList(AsyncSnapshot<ItemModel> snapshot) {
